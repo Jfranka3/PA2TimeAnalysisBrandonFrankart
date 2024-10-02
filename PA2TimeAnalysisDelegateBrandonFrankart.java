@@ -12,6 +12,10 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
 {
     //------private instance fields----
     private ArrayList<Long> testList;
+    private ArrayList<Long> timeList;
+    private long start;
+    private long stop;
+    private long elapsedTime;    
     
     /**
      * no-arg constructor
@@ -61,7 +65,11 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
         }
         return sum;
     }//End public long iterativeSummation()
-    
+
+    /**
+     * Takes the testList and performs a Gauss summation on it.
+     * @return the sum of the list
+     */
     public long gaussMethod()
     {
         long sum = testList.size()*(testList.size() + 1) / 2;
