@@ -27,6 +27,7 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
         {
             testList.add(i);
         }
+        System.out.println(reportHeader());
         System.out.println(recursiveSummation(testList.size()));
         System.out.println(iterativeSummation());
         System.out.println(gaussMethod());
@@ -67,4 +68,19 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
         long sum = testList.size()*(testList.size() + 1) / 2;
         return sum;
     }//End public long gaussMethod()
+    
+    
+    /**
+     * Constructs and returns a string to serve as the report header
+     * @return full report header
+     */
+    public String reportHeader()
+    {
+        String tempString = "";
+        tempString +=
+            "RECURSIVE VERSUS ITERATIVE ARRAY OPERATIONS" + "\n" +
+            "            Cole Brandon and Jacob Frankart" + "\n" +
+            "            October 15, 2024" + "\n" + "\n";
+        return tempString;
+    }//End public String reportHeader()
 }
