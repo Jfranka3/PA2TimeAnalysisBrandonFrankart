@@ -12,10 +12,6 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
 {
     //------private instance fields----
     private ArrayList<Long> testList;
-    private ArrayList<Long> timeList;
-    private long start;
-    private long stop;
-    private long elapsedTime;    
     
     /**
      * no-arg constructor
@@ -32,9 +28,7 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
             testList.add(i);
         }
         System.out.println(reportHeader());
-        System.out.println(recursiveSummation(testList.size()));
-        System.out.println(iterativeSummation());
-        System.out.println(gaussMethod());
+        System.out.println(equalsLine());
         
     }
     /**
@@ -66,17 +60,12 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
         }
         return sum;
     }//End public long iterativeSummation()
-
-    /**
-     * Takes the testList and performs a Gauss summation on it.
-     * @return the sum of the list
-     */
+    
     public long gaussMethod()
     {
         long sum = testList.size()*(testList.size() + 1) / 2;
         return sum;
     }//End public long gaussMethod()
-    
     
     /**
      * Constructs and returns a string to serve as the report header
@@ -91,4 +80,30 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
             "            October 15, 2024" + "\n" + "\n";
         return tempString;
     }//End public String reportHeader()
+    
+    /**
+     * Returns a string of asterisks to serve as a visual seperator
+     * @return tempString
+     */
+    private String asteriskLine()
+    {
+        String tempString = "";
+        for(int i = 64; i > 0; i--){
+            tempString += "*";
+        }
+        return tempString;
+    }//End public String asteriskLine()
+    
+    /**
+     * Returns a string of equals signs to serve as a visual seperator
+     * @return tempString
+     */
+    private String equalsLine()
+    {
+        String tempString = "";
+        for(int i = 69; i > 0; i--){
+            tempString += "=";
+        }
+        return tempString;
+    }//End public String equalsLine()
 }
