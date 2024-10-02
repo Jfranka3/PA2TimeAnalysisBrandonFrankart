@@ -11,11 +11,7 @@ import java.util.ArrayList;
 public final class PA2TimeAnalysisDelegateBrandonFrankart
 {
     //------private instance fields----
-    
-    /**
-     * Creates an ArrayList of longs with an initial size capacity of 6000
-     */
-    private ArrayList<Long> testList = new ArrayList(6000);
+    private ArrayList<Long> testList;
     
     /**
      * no-arg constructor
@@ -23,46 +19,52 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
     public PA2TimeAnalysisDelegateBrandonFrankart()
     {
         /** 
-         * Sets testList with longs from 1-6000
+         * Populates testList with longs from 1-6000
          * Tests an iterative and recursive adding of the list
          */
+        testList = new ArrayList(6000);
         for(long i = 1; i < 6001; i++)
         {
             testList.add(i);
         }
-        System.out.println(recursiveSummation(testList.getLast()));
+        System.out.println(recursiveSummation(testList.size()));
         System.out.println(iterativeSummation());
+        System.out.println(gaussMethod());
         
     }
     /**
-     * Takes the largest long of an ordered list and recursively adds each
-     * previous long
-     * @param N the largest long of the ordered list
+     * Takes a list and recursively adds each long in the list
+     * @param N the size of the list
      * @return the sum of the list
      */
-    public long recursiveSummation(long N)
+    public long recursiveSummation(int N)
     {
 
         // Base Case
-        if(N <= 1)
-            return N;
+        if(testList.get(N-1) <= 1)
+            return testList.get(N-1);
         
-        long sum = N + recursiveSummation(N - 1);
+        long sum = testList.get(N-1) + recursiveSummation(N - 1);
         return sum;
     }//End public long recursiveSummation()
     
     /**
-     * Takes the largest long of an ordered list and iteratively adds each
-     * previous long
+     * Takes a list and recursively adds each long in the list
      * @return the sum of the list
      */
     public long iterativeSummation()
     {
         long sum = 0;
-        for(int i = 0; i < 6000; i++)
+        for(int i = 0; i < testList.size(); i++)
         {
             sum += testList.get(i);
         }
         return sum;
     }//End public long iterativeSummation()
+    
+    public long gaussMethod()
+    {
+        long sum = testList.size()*(testList.size() + 1) / 2;
+        return sum;
+    }//End public long gaussMethod()
 }
