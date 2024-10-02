@@ -1,36 +1,43 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package pa2timeanalysisbrandonfrankart;
 import java.util.ArrayList;
 /**
  *
- * @author jmfra
+ * @author jmfra and brando
  */
 public final class PA2TimeAnalysisDelegateBrandonFrankart
 {
     //------private instance fields----
-    private ArrayList<Long> testList;
+    private ArrayList<Long> testList = new ArrayList(6000);
+    private ArrayList<Long> timeListItSum = new ArrayList(10001);
+    private ArrayList<Long> timeListItRev = new ArrayList(10001);
+    private ArrayList<Long> timeListRecSum = new ArrayList(10001);
+    private ArrayList<Long> timeListRecRev = new ArrayList(10001);
+    private long startTime;
+    private long stopTime;
+    private long elapsedTime;
     
     /**
      * no-arg constructor
      */
     public PA2TimeAnalysisDelegateBrandonFrankart()
     {
-        /** 
-         * Populates testList with longs from 1-6000
-         * Tests an iterative and recursive adding of the list
-         */
-        testList = new ArrayList(6000);
+        System.out.println(reportHeader());
+        System.out.println(equalsLine());
+        populateList();
+        iterativeSummationTrial();              
+    }//End public PA2TimeAnalysisDelegateBrandonFrankart()
+
+    /**
+     * Populates the testList with longs from 1-6000
+     */
+    public void populateList()
+    {
         for(long i = 1; i < 6001; i++)
         {
             testList.add(i);
         }
-        System.out.println(reportHeader());
-        System.out.println(equalsLine());
-        
-    }
+    }//End public void populateList()
+    
     /**
      * Takes a list and recursively adds each long in the list
      * @param N the size of the list
@@ -53,19 +60,35 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
      */
     public long iterativeSummation()
     {
-        long sum = 0;
+        long tempSum = 0;
         for(int i = 0; i < testList.size(); i++)
         {
-            sum += testList.get(i);
+            tempSum += testList.get(i);
         }
-        return sum;
+        return tempSum;
     }//End public long iterativeSummation()
     
     public long gaussMethod()
     {
-        long sum = testList.size()*(testList.size() + 1) / 2;
-        return sum;
+        long tempSum = testList.size()*(testList.size() + 1) / 2;
+        return tempSum;
     }//End public long gaussMethod()
+
+    /**
+     * Populates the timeListItSum with 10001 times from each individual
+     * run of the iterativeSummation method
+     */
+    public void iterativeSummationTrial()
+    {
+        for(int i = 0; i < 10001; i++)
+        {
+            startTime = System.nanoTime();
+            iterativeSummation();
+            stopTime = System.nanoTime();
+            elapsedTime = stopTime - startTime;
+            timeListItSum.add(elapsedTime/1000);
+        }
+    }//End public iterativeSummationTrail()    
     
     /**
      * Constructs and returns a string to serve as the report header
