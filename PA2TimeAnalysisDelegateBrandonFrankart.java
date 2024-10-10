@@ -1,5 +1,4 @@
 package pa2timeanalysisbrandonfrankart;
-import java.util.ArrayList;
 /**
  *
  * @author jmfra and brando
@@ -7,11 +6,8 @@ import java.util.ArrayList;
 public final class PA2TimeAnalysisDelegateBrandonFrankart
 {
     //------private instance fields----
-    private ArrayList<Long> testList = new ArrayList(6000);
-    private ArrayList<Long> timeListItSum = new ArrayList(10001);
-    private ArrayList<Long> timeListItRev = new ArrayList(10001);
-    private ArrayList<Long> timeListRecSum = new ArrayList(10001);
-    private ArrayList<Long> timeListRecRev = new ArrayList(10001);
+    private Long[] testList = new Long[6000];
+    private Long[] timeList = new Long[10001];
     private long startTime;
     private long stopTime;
     private long elapsedTime;
@@ -24,7 +20,8 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
         System.out.println(reportHeader());
         System.out.println(equalsLine());
         populateList();
-        iterativeSummationTrial();              
+        iterativeSummationTrial();  
+        frequencyTableDisplay();
     }//End public PA2TimeAnalysisDelegateBrandonFrankart()
 
     /**
@@ -32,27 +29,13 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
      */
     public void populateList()
     {
-        for(long i = 1; i < 6001; i++)
+        long val = 1;
+        for(int i = 0; i < 6000; i++)
         {
-            testList.add(i);
+            testList[i] = val;
+            val++;
         }
     }//End public void populateList()
-    
-    /**
-     * Takes a list and recursively adds each long in the list
-     * @param N the size of the list
-     * @return the sum of the list
-     */
-    public long recursiveSummation(int N)
-    {
-
-        // Base Case
-        if(testList.get(N-1) <= 1)
-            return testList.get(N-1);
-        
-        long sum = testList.get(N-1) + recursiveSummation(N - 1);
-        return sum;
-    }//End public long recursiveSummation()
     
     /**
      * Takes a list and recursively adds each long in the list
@@ -61,22 +44,22 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
     public long iterativeSummation()
     {
         long tempSum = 0;
-        for(int i = 0; i < testList.size(); i++)
+        for(int i = 0; i < testList.length; i++)
         {
-            tempSum += testList.get(i);
+            tempSum += testList[i];
         }
         return tempSum;
     }//End public long iterativeSummation()
     
     public long gaussMethod()
     {
-        long tempSum = testList.size()*(testList.size() + 1) / 2;
+        long tempSum = testList.length*(testList.length + 1) / 2;
         return tempSum;
     }//End public long gaussMethod()
 
     /**
-     * Populates the timeListItSum with 10001 times from each individual
-     * run of the iterativeSummation method
+     * Populates the timeList with 10001 times from each individual
+ run of the iterativeSummation method
      */
     public void iterativeSummationTrial()
     {
@@ -86,9 +69,90 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
             iterativeSummation();
             stopTime = System.nanoTime();
             elapsedTime = stopTime - startTime;
-            timeListItSum.add(elapsedTime/1000);
+            timeList[i] = elapsedTime/1000;
         }
-    }//End public iterativeSummationTrail()    
+    }//End public iterativeSummationTrail()
+    
+    /**
+     * Displays the frequency of time in microseconds based on a parameter list
+     */
+    public void frequencyTableDisplay()
+    {
+        System.out.println("Time in us        Frequency");
+        System.out.println("----------        ---------");
+        bubbleSort();
+        frequencyTableCreate();
+    }//End public void frequencyTableDisplay
+    
+    /**
+     * Iterates through the timeList array and finds the frequency of each time
+     */
+    public void frequencyTableCreate()
+    {
+        long currentTime = timeList[0];
+        int currentFrequency = 0;
+        for (int i =0; i < timeList.length - 1; i++)
+        {
+            if(timeList[i].compareTo(currentTime) == 0)
+            {
+                currentFrequency++;
+            }
+            else
+            {
+                System.out.println(currentTime + "            " + currentFrequency);
+                currentTime = timeList[i];
+                currentFrequency = 1;
+            }
+        }
+    }//End public void frequencyTableCreate
+    
+    /**
+     * Takes a list and recursively adds each long in the list
+     * @param N the size of the list
+     * @return the sum of the list
+     */
+    public long recursiveSummation(int N)
+    {
+        // Base Case
+        if(testList[N-1] <= 1)
+            return testList[N-1];
+        
+        long sum = testList[N-1] + recursiveSummation(N - 1);
+        return sum;
+    }//End public long recursiveSummation()    
+    
+    
+    
+    
+    // HEY HEADS UP MAYBE PUT THIS IN ANOTHER FILE ALONG WITH OTHER "TOOLBOX"
+    // METHODS AND MAKE THEM STATICS??? IDK I STOLE THIS FROM THE BOOK
+    // MIGHT ALSO NEED TO PUT frequencyTableDisplay IN TOOLBOX IDK
+    
+    
+   
+    /**
+     * Sorts the array of Longs using the bubble sort algorithm
+     * CITE THIS!!!!
+     */
+    public void bubbleSort()
+    {
+        int position;
+        int index; 
+        long temp;
+        for (position = timeList.length - 1; position >= 0; position--)
+        { 
+            for (index = 0; index <= position - 1; index++)
+            {
+                if (timeList[index].compareTo(timeList[index+1]) > 0)
+                {
+                    // Swaps values
+                    temp = timeList[index];
+                    timeList[index] = timeList[index + 1];
+                    timeList[index + 1] = temp;
+                }
+            }
+        }
+    }//End public static void bubbleSort
     
     /**
      * Constructs and returns a string to serve as the report header
