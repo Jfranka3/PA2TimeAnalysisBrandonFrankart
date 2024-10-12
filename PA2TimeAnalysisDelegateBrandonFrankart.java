@@ -6,11 +6,14 @@ package pa2timeanalysisbrandonfrankart;
 public final class PA2TimeAnalysisDelegateBrandonFrankart
 {
     //------private instance fields----
-    private Long[] testList = new Long[6000];
-    private Long[] timeList = new Long[10001];
+    private Long[] testArray;
+    private Long[] timeArray;
     private long startTime;
     private long stopTime;
+    private long sumTime;
     private long elapsedTime;
+    private int testArraySize;
+    private int timeArraySize;
     
     /**
      * no-arg constructor
@@ -18,92 +21,116 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
     public PA2TimeAnalysisDelegateBrandonFrankart()
     {
         System.out.println(reportHeader());
-        System.out.println(equalsLine());
-        populateList();
-        iterativeSummationTrial();  
-        frequencyTableDisplay();
+        iterativeSummationTrial(testArray, timeArray);
+        //testArray = populateArray(testArray);
+        //timeArray = iterativeSummationTimes(testArray, timeArray);  
+        //frequencyTableDisplay();
     }//End public PA2TimeAnalysisDelegateBrandonFrankart()
 
     /**
-     * Populates the testList with longs from 1-6000
+     * Populates an array with longs from 1-6000
+     * @param array
+     * @return the populated array
      */
-    public void populateList()
+    public Long[] populateArray(Long[] array)
     {
+        testArraySize = 6000;
+        array = new Long[testArraySize];
         long val = 1;
-        for(int i = 0; i < 6000; i++)
+        for(int i = 0; i < testArraySize; i++)
         {
-            testList[i] = val;
+            array[i] = val;
             val++;
         }
-    }//End public void populateList()
+        return array;
+    }//End public Long[] populateList()
     
     /**
-     * Takes a list and recursively adds each long in the list
+     * Takes an array and recursively adds each long in the array
+     * @param array
      * @return the sum of the list
      */
-    public long iterativeSummation()
+    public long iterativeSummation(Long[] array)
     {
-        long tempSum = 0;
-        for(int i = 0; i < testList.length; i++)
+        long sum = 0;
+        for(int i = 0; i < array.length; i++)
         {
-            tempSum += testList[i];
+            sum += array[i];
         }
-        return tempSum;
+        return sum;
     }//End public long iterativeSummation()
     
-    public long gaussMethod()
+    /**
+     * Uses the Gauss method to sum the contents of an array
+     * @param array the array to sum
+     */
+    public void gaussMethod(Long[] array)
     {
-        long tempSum = testList.length*(testList.length + 1) / 2;
-        return tempSum;
+        long firstNum = array[0];
+        String lastNum = String.format("%,d", array[array.length - 1]);
+        long gaussSum = array.length*(array.length + 1) / 2;
+        System.out.println("the sum of " + firstNum + " to " + lastNum +
+                           " is " + String.format("%,d", gaussSum));
     }//End public long gaussMethod()
 
     /**
-     * Populates the timeList with 10001 times from each individual
- run of the iterativeSummation method
+     * Populates the timeArray with 10001 times from each individual
+     * run of the iterativeSummation method
+     * @param array
+     * @param timesArray
+     * @return times
      */
-    public void iterativeSummationTrial()
+    public Long[] iterativeSummationTimes(Long[] array, Long[] timesArray)
     {
-        for(int i = 0; i < 10001; i++)
+        timeArraySize = 10001;
+        sumTime = 0;
+        timesArray = new Long[timeArraySize];
+        for(int i = 0; i < timesArray.length; i++)
         {
             startTime = System.nanoTime();
-            iterativeSummation();
+            iterativeSummation(array);
             stopTime = System.nanoTime();
             elapsedTime = stopTime - startTime;
-            timeList[i] = elapsedTime/1000;
+            timesArray[i] = elapsedTime/1000;
+            sumTime += elapsedTime/1000;
         }
-    }//End public iterativeSummationTrail()
+        return timesArray;
+    }//End public Long[] iterativeSummationTrail()
     
     /**
      * Displays the frequency of time in microseconds based on a parameter list
+     * @param timesArray
      */
-    public void frequencyTableDisplay()
+    public void displayFrequencyTable(Long[] timesArray)
     {
         System.out.println("Time in us        Frequency");
         System.out.println("----------        ---------");
-        bubbleSort();
-        frequencyTableCreate();
+        frequencyTableCreate(timesArray);
     }//End public void frequencyTableDisplay
     
     /**
-     * Iterates through the timeList array and finds the frequency of each time
+     * Iterates through the timeArray array and finds the frequency of each time
+     * @param timesArray
      */
-    public void frequencyTableCreate()
+    public void frequencyTableCreate(Long[] timesArray)
     {
-        long currentTime = timeList[0];
+        bubbleSort(timesArray);
+        long currentTime = timesArray[0];
         int currentFrequency = 0;
-        for (int i =0; i < timeList.length - 1; i++)
+        for (int i =0; i < timesArray.length; i++)
         {
-            if(timeList[i].compareTo(currentTime) == 0)
+            if(timesArray[i].compareTo(currentTime) == 0)
             {
                 currentFrequency++;
             }
             else
             {
-                System.out.println(currentTime + "            " + currentFrequency);
-                currentTime = timeList[i];
+                System.out.printf("%-4d %17d\n", currentTime, currentFrequency);
+                currentTime = timesArray[i];
                 currentFrequency = 1;
             }
         }
+        System.out.printf("%-4d %17d\n", currentTime, currentFrequency);
     }//End public void frequencyTableCreate
     
     /**
@@ -114,10 +141,10 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
     public long recursiveSummation(int N)
     {
         // Base Case
-        if(testList[N-1] <= 1)
-            return testList[N-1];
+        if(testArray[N-1] <= 1)
+            return testArray[N-1];
         
-        long sum = testList[N-1] + recursiveSummation(N - 1);
+        long sum = testArray[N-1] + recursiveSummation(N - 1);
         return sum;
     }//End public long recursiveSummation()    
     
@@ -133,26 +160,29 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
     /**
      * Sorts the array of Longs using the bubble sort algorithm
      * CITE THIS!!!!
+     * @param array
+     * @return array
      */
-    public void bubbleSort()
+    public Long[] bubbleSort(Long[] array)
     {
         int position;
         int index; 
         long temp;
-        for (position = timeList.length - 1; position >= 0; position--)
+        for (position = array.length - 1; position >= 0; position--)
         { 
             for (index = 0; index <= position - 1; index++)
             {
-                if (timeList[index].compareTo(timeList[index+1]) > 0)
+                if (array[index].compareTo(array[index+1]) > 0)
                 {
                     // Swaps values
-                    temp = timeList[index];
-                    timeList[index] = timeList[index + 1];
-                    timeList[index + 1] = temp;
+                    temp = array[index];
+                    array[index] = array[index + 1];
+                    array[index + 1] = temp;
                 }
             }
         }
-    }//End public static void bubbleSort
+        return array;
+    }//End public Long[] bubbleSort
     
     /**
      * Constructs and returns a string to serve as the report header
@@ -193,4 +223,49 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
         }
         return tempString;
     }//End public String equalsLine()
-}
+    
+    
+    
+    
+    
+    
+    //PUT EACH OF OUR TRIALS DOWN HERE
+    
+    
+    
+    
+    /**
+     * THE ENTIRE ITERATIVE SUM OF AN ARRAY PORTION
+     * @param array 
+     * @param timesArray
+     */
+    public void iterativeSummationTrial(Long[] array, Long[] timesArray)
+    {
+        array = populateArray(array);
+        System.out.println(equalsLine());
+        System.out.println("ITERATIVE SUM OF AN ARRAY OF " + 
+                           String.format("%,d", testArraySize) + " LONGS");
+        System.out.println(equalsLine());
+        System.out.println("According to the Gauss formula,");
+        gaussMethod(array);
+        System.out.println("\nVerify correctness:  sum of the cells = "
+                            + String.format("%,d", iterativeSummation(array)));
+        timesArray = iterativeSummationTimes(array, timesArray);
+        System.out.println("\n" + asteriskLine());
+        System.out.println("Frequency Table of Elapsed Times in "
+                           + String.format("%,d", timeArraySize) + " Trials");
+        System.out.println(asteriskLine());
+        displayFrequencyTable(timesArray);
+        System.out.println("\n" + asteriskLine());
+        System.out.println("\nShortest time = " + timesArray[0] + " us");
+        System.out.println("Longest time = " + timesArray[timesArray.length -1]
+                            + " us");
+        System.out.print("Total microseconds used in " + 
+                         String.format("%,d", timeArraySize) + " trials = ");
+        System.out.printf("%.1f", (double) iterativeSummation(timesArray));
+        System.out.print("\nAverage iterative sum time in " + 
+                         String.format("%,d", timeArraySize) + " trials = ");
+        System.out.printf("%.5f", (double) sumTime / timeArraySize);
+        System.out.println(" us\n\n[END Frequency Table]");
+    }
+}   
