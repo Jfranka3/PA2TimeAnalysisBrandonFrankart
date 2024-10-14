@@ -20,11 +20,10 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
      */
     public PA2TimeAnalysisDelegateBrandonFrankart()
     {
+        testArray = populateArray(testArray);
         System.out.println(reportHeader());
-        iterativeSummationTrial(testArray, timeArray);
-        //testArray = populateArray(testArray);
-        //timeArray = iterativeSummationTimes(testArray, timeArray);  
-        //frequencyTableDisplay();
+        iterativeSummationTrial(testArray, timeArray);  
+        iterativeReversalTrial(testArray, timeArray);
     }//End public PA2TimeAnalysisDelegateBrandonFrankart()
 
     /**
@@ -106,6 +105,13 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
         System.out.println("Time in us        Frequency");
         System.out.println("----------        ---------");
         frequencyTableCreate(timesArray);
+        System.out.println("\n" + asteriskLine());
+        System.out.println("\nShortest time = " + timesArray[0] + " us");
+        System.out.println("Longest time = " + timesArray[timesArray.length -1]
+                            + " us");
+        System.out.print("Total microseconds used in " + 
+                         String.format("%,d", timeArraySize) + " trials = ");
+        System.out.printf("%.1f", (double) iterativeSummation(timesArray));       
     }//End public void frequencyTableDisplay
     
     /**
@@ -148,6 +154,67 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
         return sum;
     }//End public long recursiveSummation()    
     
+    /**
+     * Iterative reversal of a list
+     * @param array an array to reverse
+     * @return the reversed array
+     */
+    public Long[] iterativeReversal(Long[] array)
+    {
+        int front = 0;
+        int end = array.length - 1;
+        long tempFront;
+        while(front < end)
+        {
+            //Swaps values
+            tempFront = array[front];
+            array[front] = array[end];
+            array[end] = tempFront;
+            
+            front++;
+            end--;
+        }
+        return array;
+    }//End public Long[] iterativeReversal
+
+    /**
+     * Populates the timeArray with 10001 times from each individual
+     * run of the iterativeReversal method
+     * @param array
+     * @param timesArray
+     * @return times
+     */
+    public Long[] iterativeReversalTimes(Long[] array, Long[] timesArray)
+    {
+        timeArraySize = 10001;
+        sumTime = 0;
+        timesArray = new Long[timeArraySize];
+        for(int i = 0; i < timesArray.length; i++)
+        {
+            startTime = System.nanoTime();
+            iterativeReversal(array);
+            stopTime = System.nanoTime();
+            elapsedTime = stopTime - startTime;
+            timesArray[i] = elapsedTime/1000;
+            sumTime += elapsedTime/1000;
+        }
+        return timesArray;
+    }//End public Long[] iterativeSummationTrail()
+    
+    /**
+     * Displays the last 10 values in an array
+     * @param array the array used
+     */
+    public void displayLast(Long[] array)
+    {
+        int end = array.length - 1;
+        int current = array.length - 10;
+        while (current <= end)
+        {
+            System.out.println(array[current]);
+            current++;
+        }
+    }//End public void displayLast
     
     
     
@@ -241,7 +308,6 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
      */
     public void iterativeSummationTrial(Long[] array, Long[] timesArray)
     {
-        array = populateArray(array);
         System.out.println(equalsLine());
         System.out.println("ITERATIVE SUM OF AN ARRAY OF " + 
                            String.format("%,d", testArraySize) + " LONGS");
@@ -256,16 +322,44 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
                            + String.format("%,d", timeArraySize) + " Trials");
         System.out.println(asteriskLine());
         displayFrequencyTable(timesArray);
-        System.out.println("\n" + asteriskLine());
-        System.out.println("\nShortest time = " + timesArray[0] + " us");
-        System.out.println("Longest time = " + timesArray[timesArray.length -1]
-                            + " us");
-        System.out.print("Total microseconds used in " + 
-                         String.format("%,d", timeArraySize) + " trials = ");
-        System.out.printf("%.1f", (double) iterativeSummation(timesArray));
         System.out.print("\nAverage iterative sum time in " + 
                          String.format("%,d", timeArraySize) + " trials = ");
         System.out.printf("%.5f", (double) sumTime / timeArraySize);
-        System.out.println(" us\n\n[END Frequency Table]");
+        System.out.println(" us\n\n[END Frequency Table]\n");          
+    }
+    
+    /**
+     * THE ENTIRE ITERATIVE REVERSAL OF AN ARRAY PORTION
+     * @param array
+     * @param timesArray
+     */
+    public void iterativeReversalTrial(Long[] array, Long[] timesArray)
+    {
+        System.out.println(equalsLine());
+        System.out.println("ITERATIVE REVERSAL OF AN ARRAY OF " + 
+                           String.format("%,d", testArraySize) + " LONGS");
+        System.out.println(equalsLine());   
+        System.out.println("Here are the last 10 values in the original list:");
+        displayLast(array);
+        System.out.println(""" 
+                           
+                           Now we will reverse the list iteratively 10,001 times
+                           to see how long it takes on average . . .""");
+        timesArray = iterativeReversalTimes(array, timesArray);
+        System.out.print("""
+                         
+                         Reversal verification:  the last 10 ordinal values
+                         in the iteratively reversed list:
+                         """);
+        displayLast(array);
+        System.out.println("\n" + asteriskLine());
+        System.out.println("Frequency Table of Elapsed Times in "
+                           + String.format("%,d", timeArraySize) + " Trials");
+        System.out.println(asteriskLine());
+        displayFrequencyTable(timesArray);
+        System.out.print("\nAverage reversal sum time in " + 
+                         String.format("%,d", timeArraySize) + " trials = ");
+        System.out.printf("%.5f", (double) sumTime / timeArraySize);
+        System.out.println(" us\n\n[END Frequency Table]\n");          
     }
 }   
