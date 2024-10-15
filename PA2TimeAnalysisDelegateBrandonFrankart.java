@@ -188,24 +188,35 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
         return timesArray;
     }//End public Long[] iterativeSummationTrail()
     
-    /**
+   /**
      * Recursive Reversal of a given Array
      * @param array the array to be reversed
-     * @param front a pointer tracking the current operational 'front'
-     * @param end a pointer tracking the current operational 'end'
      * @return array reversed
      */
-    public Long[] recursiveReversal(Long[] array, int front, int end)
+    public Long[] recursiveReversal(Long[] array)
     {
-        if (front == end || front > end)
+        //Base Cases
+        if (array.length == 0)
+            return array;
+        if (array.length == 1)
             return array;
         
-        long temp = array[front];
-        array[front] = array[end];
-        array[end] = temp;
-        recursiveReversal(array,front+1,end-1);
-        return array;
-    }// 
+        Long[] reversedArray = new Long[array.length];
+        
+        reversedArray[0] = array[array.length - 1];
+        reversedArray[array.length - 1] = array[0];
+        
+        //Decrease Array Size
+        Long[] newArray = new Long[array.length - 2];
+        System.arraycopy(array, 1, newArray, 0, array.length - 2);
+        
+        //Reverse New Array
+        Long[] reversedMiddle = recursiveReversal(newArray);
+        
+        System.arraycopy(reversedMiddle, 0, reversedArray, 1, reversedMiddle.length);
+        
+        return reversedArray;
+    }//
     
         public Long[] recursiveReversalTimes(Long[] array, Long[] timesArray)
     {
