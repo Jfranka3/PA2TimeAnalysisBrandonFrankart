@@ -38,7 +38,6 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
         reversalComparison();
     }//End public PA2TimeAnalysisDelegateBrandonFrankart()
     
-    
     /**
      * Displays the frequency of time in microseconds based on a parameter list
      * @param timesArray
@@ -56,7 +55,6 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
                          String.format("%,d", timeArraySize) + " trials = ");
         System.out.printf("%.1f", (double) PA2TimeAnalysisModelBrandonFrankart.iterativeSummation(timeArray));       
     }//End public void frequencyTableDisplay
-    
     
     /**
      * THE ENTIRE ITERATIVE SUM OF AN ARRAY PORTION
@@ -86,7 +84,6 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
         iterativeSumAverageTime = (double) sumTime / timeArraySize;
         System.out.println(" μs\n\n[END Frequency Table]\n");          
     }
-    
     
     /**
      * THE ENTIRE ITERATIVE REVERSAL OF AN ARRAY PORTION
@@ -125,7 +122,6 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
         System.out.println(" μs\n\n[END Frequency Table]\n");          
     }
     
-    
     /**
      * THE ENTIRE RECURSIVE REVERSAL OF AN ARRAY PORTION
      * @param array
@@ -163,7 +159,6 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
         System.out.println(" μs\n\n[END Frequency Table]\n");          
     }
     
-    
     /**
      * THE ENTIRE recursive SUM OF AN ARRAY PORTION
      * @param array 
@@ -192,7 +187,6 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
         recursiveSumAverageTime = (double) sumTime / timeArraySize;
         System.out.println(" μs\n\n[END Frequency Table]\n");          
     }
-    
     
     /**
      * This compares the efficiency of both summation algorithms
@@ -224,7 +218,6 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
         }
         System.out.println("\n");
     }
-    
     
     /**
      * This compares the efficiency of both reversal algorithms
