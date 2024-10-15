@@ -54,21 +54,6 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
     }//End public Long[] populateList()
     
     /**
-     * Takes an array and recursively adds each long in the array
-     * @param array
-     * @return the sum of the list
-     */
-    public long iterativeSummation(Long[] array)
-    {
-        long sum = 0;
-        for(int i = 0; i < array.length; i++)
-        {
-            sum += array[i];
-        }
-        return sum;
-    }//End public long iterativeSummation()
-    
-    /**
      * Uses the Gauss method to sum the contents of an array
      * @param array the array to sum
      */
@@ -80,54 +65,6 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
         System.out.println("the sum of " + firstNum + " to " + lastNum +
                            " is " + String.format("%,d", gaussSum));
     }//End public long gaussMethod()
-
-    /**
-     * Populates the timeArray with 10001 times from each individual
-     * run of the iterativeSummation method
-     * @param array
-     * @param timesArray
-     * @return times
-     */
-    public Long[] iterativeSummationTimes(Long[] array, Long[] timesArray)
-    {
-        timeArraySize = 10001;
-        sumTime = 0;
-        timesArray = new Long[timeArraySize];
-        for(int i = 0; i < timesArray.length; i++)
-        {
-            startTime = System.nanoTime();
-            iterativeSummation(array);
-            stopTime = System.nanoTime();
-            elapsedTime = stopTime - startTime;
-            timesArray[i] = elapsedTime/1000;
-            sumTime += elapsedTime/1000;
-        }
-        return timesArray;
-    }//End public Long[] iterativeSummationTrail()
-    
-    /**
-     * Populates the timeArray with 10001 times from each individual
-     * run of the recursiveSummation method
-     * @param array
-     * @param timesArray
-     * @return times
-     */
-    public Long[] recursiveSummationTimes(Long[] array, Long[] timesArray)
-    {
-        timeArraySize = 10001;
-        sumTime = 0;
-        timesArray = new Long[timeArraySize];
-        for(int i = 0; i < timesArray.length; i++)
-        {
-            startTime = System.nanoTime();
-            recursiveSummation(array, array.length);
-            stopTime = System.nanoTime();
-            elapsedTime = stopTime - startTime;
-            timesArray[i] = elapsedTime/1000;
-            sumTime += elapsedTime/1000;
-        }
-        return timesArray;
-    }//End public Long[] iterativeSummationTrail()
     
     /**
      * Displays the frequency of time in microseconds based on a parameter list
@@ -189,6 +126,105 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
     }//End public long recursiveSummation()    
     
     /**
+     * Populates the timeArray with 10001 times from each individual
+     * run of the recursiveSummation method
+     * @param array
+     * @param timesArray
+     * @return times
+     */
+    public Long[] recursiveSummationTimes(Long[] array, Long[] timesArray)
+    {
+        timeArraySize = 10001;
+        sumTime = 0;
+        timesArray = new Long[timeArraySize];
+        for(int i = 0; i < timesArray.length; i++)
+        {
+            startTime = System.nanoTime();
+            recursiveSummation(array, array.length);
+            stopTime = System.nanoTime();
+            elapsedTime = stopTime - startTime;
+            timesArray[i] = elapsedTime/1000;
+            sumTime += elapsedTime/1000;
+        }
+        return timesArray;
+    }//End public Long[] iterativeSummationTrail()
+    
+    /**
+     * Takes an array and recursively adds each long in the array
+     * @param array
+     * @return the sum of the list
+     */
+    public long iterativeSummation(Long[] array)
+    {
+        long sum = 0;
+        for(int i = 0; i < array.length; i++)
+        {
+            sum += array[i];
+        }
+        return sum;
+    }//End public long iterativeSummation()
+    
+    /**
+     * Populates the timeArray with 10001 times from each individual
+     * run of the iterativeSummation method
+     * @param array
+     * @param timesArray
+     * @return times
+     */
+    public Long[] iterativeSummationTimes(Long[] array, Long[] timesArray)
+    {
+        timeArraySize = 10001;
+        sumTime = 0;
+        timesArray = new Long[timeArraySize];
+        for(int i = 0; i < timesArray.length; i++)
+        {
+            startTime = System.nanoTime();
+            iterativeSummation(array);
+            stopTime = System.nanoTime();
+            elapsedTime = stopTime - startTime;
+            timesArray[i] = elapsedTime/1000;
+            sumTime += elapsedTime/1000;
+        }
+        return timesArray;
+    }//End public Long[] iterativeSummationTrail()
+    
+    /**
+     * Recursive Reversal of a given Array
+     * @param array the array to be reversed
+     * @param front a pointer tracking the current operational 'front'
+     * @param end a pointer tracking the current operational 'end'
+     * @return array reversed
+     */
+    public Long[] recursiveReversal(Long[] array, int front, int end)
+    {
+        if (front == end || front > end)
+            return array;
+        
+        long temp = array[front];
+        array[front] = array[end];
+        array[end] = temp;
+        recursiveReversal(array,front+1,end-1);
+        return array;
+    }// 
+    
+        public Long[] recursiveReversalTimes(Long[] array, Long[] timesArray)
+    {
+        timeArraySize = 10001;
+        sumTime = 0;
+        timesArray = new Long[timeArraySize];
+        for(int i = 0; i < timesArray.length; i++)
+        {
+            startTime = System.nanoTime();
+            recursiveReversal(array, 0, array.length - 1);
+            stopTime = System.nanoTime();
+            elapsedTime = stopTime - startTime;
+            timesArray[i] = elapsedTime/1000;
+            sumTime += elapsedTime/1000;
+        }
+        return timesArray;
+    }//End public Long[] recursiveSummationTrail()
+    
+    /**
      * Iterative reversal of a list
      * @param array an array to reverse
      * @return the reversed array
@@ -216,7 +252,7 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
      * run of the iterativeReversal method
      * @param array
      * @param timesArray
-     * @return times
+     * @return timesArray
      */
     public Long[] iterativeReversalTimes(Long[] array, Long[] timesArray)
     {
@@ -235,24 +271,12 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
         return timesArray;
     }//End public Long[] iterativeSummationTrail()
     
-    public Long[] recursiveReversalTimes(Long[] array, Long[] timesArray)
-    {
-        timeArraySize = 10001;
-        sumTime = 0;
-        timesArray = new Long[timeArraySize];
-        for(int i = 0; i < timesArray.length; i++)
-        {
-            startTime = System.nanoTime();
-            recursiveReversal(array, 0, array.length - 1);
-            stopTime = System.nanoTime();
-            elapsedTime = stopTime - startTime;
-            timesArray[i] = elapsedTime/1000;
-            sumTime += elapsedTime/1000;
-        }
-        return timesArray;
-    }//End public Long[] recursiveSummationTrail()
     
-    /**
+    // HEY HEADS UP MAYBE PUT THIS IN ANOTHER FILE ALONG WITH OTHER "TOOLBOX"
+    // METHODS AND MAKE THEM STATICS??? IDK I STOLE THIS FROM THE BOOK
+    // MIGHT ALSO NEED TO PUT frequencyTableDisplay IN TOOLBOX IDK
+    
+     /**
      * Displays the last 10 values in an array
      * @param array the array used
      */
@@ -266,29 +290,6 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
             current++;
         }
     }//End public void displayLast
-    
-       /**
-     * Recursive Reversal of a given Array
-     * @param array the array to be reversed
-     * @return array reversed
-     */
-    public Long[] recursiveReversal(Long[] array, int front, int end)
-    {
-        if (front == end || front > end)
-            return array;
-        
-        long temp = array[front];
-        array[front] = array[end];
-        array[end] = temp;
-        recursiveReversal(array,front+1,end-1);
-        return array;
-    }// 
-    
-    // HEY HEADS UP MAYBE PUT THIS IN ANOTHER FILE ALONG WITH OTHER "TOOLBOX"
-    // METHODS AND MAKE THEM STATICS??? IDK I STOLE THIS FROM THE BOOK
-    // MIGHT ALSO NEED TO PUT frequencyTableDisplay IN TOOLBOX IDK
-    
-    
    
     /**
      * Sorts the array of Longs using the bubble sort algorithm
@@ -508,9 +509,9 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
         System.out.println("Time in  us       Algorithm");
         System.out.println("-----------       ---------");
         System.out.printf("%.5f", iterativeSumAverageTime);
-        System.out.println("           Iterative\n");
+        System.out.println("           Iterative");
         System.out.printf("%.5f", recursiveSumAverageTime);
-        System.out.println("           Recursive\n");
+        System.out.println("           Recursive");
         if(recursiveSumAverageTime > iterativeSumAverageTime)
         {
             System.out.print("The recursive sum algorithm took ");
@@ -523,7 +524,7 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
             System.out.printf("%.1f", ((iterativeSumAverageTime/recursiveSumAverageTime)*100)-100);
             System.out.print("% longer.");
         }
-        System.out.print("");
+        System.out.println("\n");
     }
     
     /**
@@ -539,21 +540,21 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
         System.out.println("Time in  us       Algorithm");
         System.out.println("-----------       ---------");
         System.out.printf("%.5f", iterativeRevAverageTime);
-        System.out.println("           Iterative\n");
+        System.out.println("           Iterative");
         System.out.printf("%.5f", recursiveRevAverageTime);
         System.out.println("           Recursive\n");
         if(recursiveRevAverageTime > iterativeRevAverageTime)
         {
-            System.out.print("The recursive sum algorithm took ");
+            System.out.print("The recursive reverse algorithm took ");
             System.out.printf("%.1f", ((recursiveRevAverageTime/iterativeRevAverageTime)*100)-100);
             System.out.print("% longer than the iterative algorithm.");
         }
         else 
         {
-            System.out.print("The iterative sum algorithm took ");
+            System.out.print("The iterative reverse algorithm took ");
             System.out.printf("%.1f", ((iterativeRevAverageTime/recursiveRevAverageTime)*100)-100);
             System.out.print("% longer than the recursive algorithm.");
         }
-        System.out.print("");
+        System.out.println("");
     }
 }   
