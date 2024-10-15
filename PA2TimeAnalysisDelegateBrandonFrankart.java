@@ -2,7 +2,7 @@ package pa2timeanalysisbrandonfrankart;
 
 /**
  *
- * @author jmfra and brando
+ * @authors Jacob Frankart and Cole Brandon
  */
 public final class PA2TimeAnalysisDelegateBrandonFrankart
 {
