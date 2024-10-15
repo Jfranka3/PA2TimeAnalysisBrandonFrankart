@@ -9,9 +9,6 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
     //------private instance fields----
     private Long[] testArray;
     private Long[] timeArray;
-    private long startTime;
-    private long stopTime;
-    private long elapsedTime;
     private long sumTime;
     private final int testArraySize;
     private final int timeArraySize;
