@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package pa2timeanalysisbrandonfrankart;
 
 /**
@@ -25,11 +21,10 @@ public final class PA2TimeAnalysisModelBrandonFrankart
             
             """;
         return tempString;
-    }//End public String reportHeader()
-    
-    
+    }//End public static String reportHeader()
+     
     /**
-     * Populates an array with longs from 1-6000
+     * Populates an array with longs from 1 to the arraySize
      * @param array the array that is being operated on
      * @param arraySize the size of the array
      * @return the populated array
@@ -44,28 +39,14 @@ public final class PA2TimeAnalysisModelBrandonFrankart
             val++;
         }
         return array;
-    }//End public Long[] populateList()
-    
-    
-    /**
-     * Uses the Gauss method to sum the contents of an array
-     * @param array the array to sum
-     */
-    public static void gaussMethod(Long[] array)
-    {
-        long firstNum = array[0];
-        String lastNum = String.format("%,d", array[array.length - 1]);
-        long gaussSum = array.length*(array.length + 1) / 2;
-        System.out.println("the sum of " + firstNum + " to " + lastNum +
-                           " is " + String.format("%,d", gaussSum));
-    }//End public long gaussMethod()
-    
+    }//End public static Long[] populateList()
     
     /**
+     * Following code was drew influence from Lewis and Chase in their
+     * 4th edition copy of Java Software Structures
      * Sorts the array of Longs using the bubble sort algorithm
-     * CITE THIS!!!!
-     * @param array
-     * @return array
+     * @param array the array to sort
+     * @return the array sorted in ascending value
      */
     public static Long[] bubbleSort(Long[] array)
     {
@@ -86,57 +67,11 @@ public final class PA2TimeAnalysisModelBrandonFrankart
             }
         }
         return array;
-    }//End public Long[] bubbleSort
-    
-    
-    /**
-     * Displays the last 10 values in an array
-     * @param array the array used
-     */
-    public static void displayLast(Long[] array)
-    {
-        int end = array.length - 1;
-        int current = array.length - 10;
-        while (current <= end)
-        {
-            System.out.println(array[current]);
-            current++;
-        }
-    }//End public void displayLast
-    
-    
-    /**
-     * Iterates through the timeArray array and finds the frequency of each time
-     * @param timesArray
-     */
-    public static void frequencyTableCreate(Long[] timesArray)
-    {
-        bubbleSort(timesArray);
-        long currentTime = timesArray[0];
-        int currentFrequency = 0;
-        for (int i =0; i < timesArray.length; i++)
-        {
-            if(timesArray[i].compareTo(currentTime) == 0)
-            {
-                currentFrequency++;
-            }
-            else
-            {
-                System.out.printf("%-4d %17d\n", currentTime, currentFrequency);
-                currentTime = timesArray[i];
-                currentFrequency = 1;
-            }
-        }
-        System.out.printf("%-4d %17d\n", currentTime, currentFrequency);
-    }//End public void frequencyTableCreate
-    
-    
-    
-    
-    
+    }//End public static Long[] bubbleSort
+      
     /**
      * Returns a string of asterisks to serve as a visual separator
-     * @return tempString
+     * @return the string of asterisks
      */
     public static String asteriskLine()
     {
@@ -145,12 +80,11 @@ public final class PA2TimeAnalysisModelBrandonFrankart
             tempString += "*";
         }
         return tempString;
-    }//End public String asteriskLine()
-    
-    
+    }//End public static String asteriskLine()
+   
     /**
      * Returns a string of equals signs to serve as a visual separator
-     * @return tempString
+     * @return the string of equals
      */
     public static String equalsLine()
     {
@@ -159,8 +93,7 @@ public final class PA2TimeAnalysisModelBrandonFrankart
             tempString += "=";
         }
         return tempString;
-    }//End public String equalsLine()
-    
+    }//End public static String equalsLine()
     
     /**
      * Takes a list and recursively adds each long in the list
@@ -173,19 +106,17 @@ public final class PA2TimeAnalysisModelBrandonFrankart
         // Base Case
         if(array[index-1] <= 1)
             return array[index-1];
-        
-        
+      
         return array[index-1] + recursiveSummation(array, index - 1);
-    }//End public long recursiveSummation()    
-    
-    
+    }//End public static long recursiveSummation()    
+      
     /**
      * Populates the timeArray with 10001 times from each individual
      * run of the recursiveSummation method
      * @param array
      * @param timesArray
      * @param size
-     * @return times
+     * @return an array of times
      */
     public static Long[] recursiveSummationTimes(Long[] array, Long[] timesArray, int size)
     {
@@ -199,9 +130,8 @@ public final class PA2TimeAnalysisModelBrandonFrankart
             timesArray[i] = elapsed/1000;
         }
         return timesArray;
-    }//End public Long[] iterativeSummationTrail()
-    
-    
+    }//End public static Long[] iterativeSummationTrail()
+        
     /**
      * Takes an array and recursively adds each long in the array
      * @param array
@@ -210,45 +140,40 @@ public final class PA2TimeAnalysisModelBrandonFrankart
     public static long iterativeSummation(Long[] array)
     {
         long sum = 0;
-        for(int i = 0; i < array.length; i++)
+        for (int i = 0; i < array.length; i++)
         {
             sum += array[i];
         }
         return sum;
-    }//End public long iterativeSummation()
-    
-    
+    }//End public static long iterativeSummation()
+        
     /**
      * Populates the timeArray with 10001 times from each individual
      * run of the iterativeSummation method
      * @param array
      * @param timesArray
-     * @return times
+     * @return an array of times
      */
-    public static Long[] iterativeSummationTimes(Long[] array, Long[] timesArray, int size, long sum, long start, long stop, long elapsed)
+    public static Long[] iterativeSummationTimes(Long[] array, Long[] timesArray, int size)
     {
-        size = 10001;
-        sum = 0;
         timesArray = new Long[size];
         for(int i = 0; i < timesArray.length; i++)
         {
-            start = System.nanoTime();
+            long start = System.nanoTime();
             PA2TimeAnalysisModelBrandonFrankart.iterativeSummation(array);
-            stop = System.nanoTime();
-            elapsed = stop - start;
+            long stop = System.nanoTime();
+            long elapsed = stop - start;
             timesArray[i] = elapsed/1000;
-            sum += elapsed/1000;
         }
         return timesArray;
-    }//End public Long[] iterativeSummationTrail()
-    
-    
+    }//End public static Long[] iterativeSummationTrail()
+        
     /**
      * Recursive Reversal of a given Array
      * @param array the array to be reversed
      * @param front a pointer tracking the current operational 'front'
      * @param end a pointer tracking the current operational 'end'
-     * @return array reversed
+     * @return the array reversed
      */
     public static Long[] recursiveReversal(Long[] array, int front, int end)
     {
@@ -260,36 +185,29 @@ public final class PA2TimeAnalysisModelBrandonFrankart
         array[end] = temp;
         recursiveReversal(array,front+1,end-1);
         return array;
-    }// 
+    }//End public static Long[] recursiveReversal()
     
     /**
-     * 
+     * Populates the timeArray with 10001 times from each individual
+     * run of the recursiveReversal method
      * @param array
      * @param timesArray
      * @param size
-     * @param sum
-     * @param start
-     * @param stop
-     * @param elapsed
-     * @return 
+     * @return the time array
      */
-    public static Long[] recursiveReversalTimes(Long[] array, Long[] timesArray, int size, long sum, long start, long stop, long elapsed)
+    public static Long[] recursiveReversalTimes(Long[] array, Long[] timesArray, int size)
     {
-        size = 10001;
-        sum = 0;
         timesArray = new Long[size];
         for(int i = 0; i < timesArray.length; i++)
         {
-            start = System.nanoTime();
+            long start = System.nanoTime();
             recursiveReversal(array, 0, array.length - 1);
-            stop = System.nanoTime();
-            elapsed = stop - start;
+            long stop = System.nanoTime();
+            long elapsed = stop - start;
             timesArray[i] = elapsed/1000;
-            sum += elapsed/1000;
         }
         return timesArray;
-    }//End public Long[] recursiveSummationTrail()
-    
+    }//End public static Long[] recursiveSummationTrail()
     
     /**
      * Iterative reversal of a list
@@ -312,8 +230,7 @@ public final class PA2TimeAnalysisModelBrandonFrankart
             end--;
         }
         return array;
-    }//End public Long[] iterativeReversal
-    
+    }//End public static Long[] iterativeReversal
     
     /**
      * Populates the timeArray with 10001 times from each individual
@@ -321,26 +238,19 @@ public final class PA2TimeAnalysisModelBrandonFrankart
      * @param array
      * @param timesArray
      * @param size
-     * @param sum
-     * @param start
-     * @param elapsed
-     * @param stop
-     * @return timesArray
+     * @return the time array
      */
-    public static Long[] iterativeReversalTimes(Long[] array, Long[] timesArray, int size, long sum, long start, long stop, long elapsed)
+    public static Long[] iterativeReversalTimes(Long[] array, Long[] timesArray, int size)
     {
-        size = 10001;
-        sum = 0;
         timesArray = new Long[size];
         for(int i = 0; i < timesArray.length; i++)
         {
-            start = System.nanoTime();
+            long start = System.nanoTime();
             iterativeReversal(array);
-            stop = System.nanoTime();
-            elapsed = stop - start;
+            long stop = System.nanoTime();
+            long elapsed = stop - start;
             timesArray[i] = elapsed/1000;
-            sum += elapsed/1000;
         }
         return timesArray;
-    }//End public Long[] iterativeReversalTimes()
+    }//End public static Long[] iterativeReversalTimes()
 }
