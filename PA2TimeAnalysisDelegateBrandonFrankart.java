@@ -237,7 +237,22 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
         }
     }//End public void displayLast
     
-    
+       /**
+     * Recursive Reversal of a given Array
+     * @param array the array to be reversed
+     * @return array reversed
+     */
+    public Long[] recursiveReversal(Long[] array, int front, int end)
+    {
+        if (front == end || front > end)
+            return array;
+        
+        long temp = array[front];
+        array[front] = array[end];
+        array[end] = temp;
+        recursiveReversal(array,front+1,end-1);
+        return array;
+    }// 
     
     // HEY HEADS UP MAYBE PUT THIS IN ANOTHER FILE ALONG WITH OTHER "TOOLBOX"
     // METHODS AND MAKE THEM STATICS??? IDK I STOLE THIS FROM THE BOOK
