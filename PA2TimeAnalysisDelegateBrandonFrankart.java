@@ -45,13 +45,13 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
      */
     public void displayFrequencyTable(Long[] timesArray)
     {
-        System.out.println("Time in us        Frequency");
+        System.out.println("Time in μs        Frequency");
         System.out.println("----------        ---------");
         PA2TimeAnalysisModelBrandonFrankart.frequencyTableCreate(timeArray);
         System.out.println("\n" + PA2TimeAnalysisModelBrandonFrankart.asteriskLine());
-        System.out.println("\nShortest time = " + timeArray[0] + " us");
+        System.out.println("\nShortest time = " + timeArray[0] + " μs");
         System.out.println("Longest time = " + timeArray[timeArray.length -1]
-                            + " us");
+                            + " μs");
         System.out.print("Total microseconds used in " + 
                          String.format("%,d", timeArraySize) + " trials = ");
         System.out.printf("%.1f", (double) PA2TimeAnalysisModelBrandonFrankart.iterativeSummation(timeArray));       
@@ -84,7 +84,7 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
         sumTime = PA2TimeAnalysisModelBrandonFrankart.iterativeSummation(timeArray);
         System.out.printf("%.5f", (double) sumTime / timeArraySize);
         iterativeSumAverageTime = (double) sumTime / timeArraySize;
-        System.out.println(" us\n\n[END Frequency Table]\n");          
+        System.out.println(" μs\n\n[END Frequency Table]\n");          
     }
     
     
@@ -122,7 +122,7 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
         sumTime = PA2TimeAnalysisModelBrandonFrankart.iterativeSummation(timeArray);
         System.out.printf("%.5f", (double) sumTime / timeArraySize);
         iterativeRevAverageTime = (double) sumTime / timeArraySize;
-        System.out.println(" us\n\n[END Frequency Table]\n");          
+        System.out.println(" μs\n\n[END Frequency Table]\n");          
     }
     
     
@@ -160,7 +160,7 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
         sumTime = PA2TimeAnalysisModelBrandonFrankart.iterativeSummation(timeArray);
         System.out.printf("%.5f", (double) sumTime / timeArraySize);
         recursiveRevAverageTime = (double) sumTime / timeArraySize;
-        System.out.println(" us\n\n[END Frequency Table]\n");          
+        System.out.println(" μs\n\n[END Frequency Table]\n");          
     }
     
     
@@ -190,7 +190,7 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
         sumTime = PA2TimeAnalysisModelBrandonFrankart.iterativeSummation(timeArray);
         System.out.printf("%.5f", (double) sumTime / timeArraySize);
         recursiveSumAverageTime = (double) sumTime / timeArraySize;
-        System.out.println(" us\n\n[END Frequency Table]\n");          
+        System.out.println(" μs\n\n[END Frequency Table]\n");          
     }
     
     
@@ -204,7 +204,7 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
         System.out.println("Average Times to Sum an Array of 6,000 Longs in 10,001 Trials");
         System.out.println(PA2TimeAnalysisModelBrandonFrankart.equalsLine());
         System.out.print("\n");
-        System.out.println("Time in  us       Algorithm");
+        System.out.println("Time in  μs       Algorithm");
         System.out.println("-----------       ---------");
         System.out.printf("%.5f", iterativeSumAverageTime);
         System.out.println("           Iterative");
@@ -236,7 +236,7 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
         System.out.println("Average Times to Reverse an Array of 6,000 Longs in 10,001 Trials");
         System.out.println(PA2TimeAnalysisModelBrandonFrankart.equalsLine());
         System.out.print("\n");
-        System.out.println("Time in  us       Algorithm");
+        System.out.println("Time in  μs       Algorithm");
         System.out.println("-----------       ---------");
         System.out.printf("%.5f", iterativeRevAverageTime);
         System.out.println("           Iterative");
