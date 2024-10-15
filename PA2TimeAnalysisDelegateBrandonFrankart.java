@@ -59,7 +59,9 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
                             + " us");
         System.out.print("Total microseconds used in " + 
                          String.format("%,d", timeArraySize) + " trials = ");
-        System.out.printf("%.1f", (double) PA2TimeAnalysisModelBrandonFrankart.iterativeSummation(timeArray));       
+        System.out.printf("%.1f", (double) 
+                PA2TimeAnalysisModelBrandonFrankart.iterativeSummation(
+                        timeArray));       
     }//End public void frequencyTableDisplay
     
     
@@ -77,7 +79,7 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
         System.out.println("According to the Gauss formula,");
         gaussMethod(array);
         System.out.println("\nVerify correctness:  sum of the cells = "
-                            + String.format("%,d", PA2TimeAnalysisModelBrandonFrankart.iterativeSummation(array)));
+            + String.format("%,d", PA2TimeAnalysisModelBrandonFrankart.iterativeSummation(array)));
         timeArray = PA2TimeAnalysisModelBrandonFrankart.iterativeSummationTimes(array, timesArray, timeArraySize);
         System.out.println("\n" + PA2TimeAnalysisModelBrandonFrankart.asteriskLine());
         System.out.println("Frequency Table of Elapsed Times in "
@@ -313,6 +315,5 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
             }
         }
         System.out.printf("%-4d %17d\n", currentTime, currentFrequency);
-    }//End public void frequencyTableCreate
-    
-}   
+    }//End public void frequencyTableCreate  
+}//End public final class PA2TimeAnalysisDelegateBrandonFrankart  
