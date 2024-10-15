@@ -38,7 +38,6 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
         reversalComparison();
     }//End public PA2TimeAnalysisDelegateBrandonFrankart()
     
-    
     /**
      * Displays the frequency of time in microseconds based on a 
      * parameter list
@@ -60,7 +59,6 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
                 PA2TimeAnalysisModelBrandonFrankart.iterativeSummation(
                         timeArray));       
     }//End public void frequencyTableDisplay
-    
     
     /**
      * THE ENTIRE ITERATIVE SUM OF AN ARRAY PORTION
@@ -89,8 +87,7 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
         System.out.printf("%.5f", (double) sumTime / timeArraySize);
         iterativeSumAverageTime = (double) sumTime / timeArraySize;
         System.out.println(" us\n\n[END Frequency Table]\n");          
-    }
-    
+    }//end public void iterativeSummationTrial
     
     /**
      * THE ENTIRE ITERATIVE REVERSAL OF AN ARRAY PORTION
@@ -127,8 +124,7 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
         System.out.printf("%.5f", (double) sumTime / timeArraySize);
         iterativeRevAverageTime = (double) sumTime / timeArraySize;
         System.out.println(" us\n\n[END Frequency Table]\n");          
-    }
-    
+    }//end public void iteratitiveReversalTrial
     
     /**
      * THE ENTIRE RECURSIVE REVERSAL OF AN ARRAY PORTION
@@ -165,8 +161,7 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
         System.out.printf("%.5f", (double) sumTime / timeArraySize);
         recursiveRevAverageTime = (double) sumTime / timeArraySize;
         System.out.println(" us\n\n[END Frequency Table]\n");          
-    }
-    
+    }//end public void recursiveReversalTrial
     
     /**
      * THE ENTIRE recursive SUM OF AN ARRAY PORTION
@@ -195,8 +190,7 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
         System.out.printf("%.5f", (double) sumTime / timeArraySize);
         recursiveSumAverageTime = (double) sumTime / timeArraySize;
         System.out.println(" us\n\n[END Frequency Table]\n");          
-    }
-    
+    }//end public void recursiveSummationTrial
     
     /**
      * This compares the efficiency of both summation algorithms
@@ -227,8 +221,7 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
             System.out.print("% longer.");
         }
         System.out.println("\n");
-    }
-    
+    }//end public void summationComparison
     
     /**
      * This compares the efficiency of both reversal algorithms
@@ -259,7 +252,7 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
             System.out.print("% longer than the recursive algorithm.");
         }
         System.out.println("");
-    }
+    }//End public void reversalComparison
     
     /**
      * Uses the Gauss method to sum the contents of an array
@@ -272,7 +265,7 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
         long gaussSum = array.length*(array.length + 1) / 2;
         System.out.println("the sum of " + firstNum + " to " + lastNum +
                            " is " + String.format("%,d", gaussSum));
-    }//End public void gaussMethod()
+    }//End public void gaussMethod
     
     /**
      * Displays the last 10 values in an array
@@ -287,7 +280,7 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
             System.out.println(array[current]);
             current++;
         }
-    }//End public void displayLast()
+    }//End public void displayLast
     
     /**
      * Iterates through the timeArray array and finds the frequency of each time
