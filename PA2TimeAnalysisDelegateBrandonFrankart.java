@@ -144,15 +144,15 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
      * @param N the size of the list
      * @return the sum of the list
      */
-    public long recursiveSummation(int N)
+    public long recursiveSummation(Long[] array, int index)
     {
         // Base Case
-        if(testArray[N-1] <= 1)
-            return testArray[N-1];
+        if(array[index-1] <= 1)
+            return array[index-1];
         
-        long sum = testArray[N-1] + recursiveSummation(N - 1);
+        long sum = array[index-1] + recursiveSummation(array, index - 1);
         return sum;
-    }//End public long recursiveSummation()    
+    }//End public long recursiveSummation() 
     
     /**
      * Iterative reversal of a list
