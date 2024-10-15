@@ -118,13 +118,15 @@ public final class PA2TimeAnalysisModelBrandonFrankart
      * @param size
      * @return an array of times
      */
-    public static Long[] recursiveSummationTimes(Long[] array, Long[] timesArray, int size)
+    public static Long[] recursiveSummationTimes(Long[] array, 
+            Long[] timesArray, int size)
     {
         timesArray = new Long[size];
         for(int i = 0; i < timesArray.length; i++)
         {
             long start = System.nanoTime();
-            PA2TimeAnalysisModelBrandonFrankart.recursiveSummation(array, array.length);
+            PA2TimeAnalysisModelBrandonFrankart.recursiveSummation(array, 
+                    array.length);
             long stop = System.nanoTime();
             long elapsed = stop - start;
             timesArray[i] = elapsed/1000;
@@ -154,7 +156,8 @@ public final class PA2TimeAnalysisModelBrandonFrankart
      * @param timesArray
      * @return an array of times
      */
-    public static Long[] iterativeSummationTimes(Long[] array, Long[] timesArray, int size)
+    public static Long[] iterativeSummationTimes(Long[] array, 
+            Long[] timesArray, int size)
     {
         timesArray = new Long[size];
         for(int i = 0; i < timesArray.length; i++)
@@ -195,7 +198,8 @@ public final class PA2TimeAnalysisModelBrandonFrankart
      * @param size
      * @return the time array
      */
-    public static Long[] recursiveReversalTimes(Long[] array, Long[] timesArray, int size)
+    public static Long[] recursiveReversalTimes(Long[] array, 
+            Long[] timesArray, int size)
     {
         timesArray = new Long[size];
         for(int i = 0; i < timesArray.length; i++)
@@ -240,7 +244,8 @@ public final class PA2TimeAnalysisModelBrandonFrankart
      * @param size
      * @return the time array
      */
-    public static Long[] iterativeReversalTimes(Long[] array, Long[] timesArray, int size)
+    public static Long[] iterativeReversalTimes(Long[] array, 
+            Long[] timesArray, int size)
     {
         timesArray = new Long[size];
         for(int i = 0; i < timesArray.length; i++)
@@ -253,4 +258,4 @@ public final class PA2TimeAnalysisModelBrandonFrankart
         }
         return timesArray;
     }//End public static Long[] iterativeReversalTimes()
-}
+}//End public Final Class PA2TimeAnalysisModelBrandonFrankart
