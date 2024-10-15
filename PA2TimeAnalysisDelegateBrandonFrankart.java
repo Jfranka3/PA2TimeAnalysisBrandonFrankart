@@ -14,6 +14,8 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
     private long elapsedTime;
     private int testArraySize;
     private int timeArraySize;
+    private double recursiveSumAverageTime;
+    private double iterativeSumAverageTime;
     
     /**
      * no-arg constructor
@@ -22,7 +24,9 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
     {
         testArray = populateArray(testArray);
         System.out.println(reportHeader());
+        recursiveSummationTrial(testArray, timeArray);
         iterativeSummationTrial(testArray, timeArray);  
+        summationComparison();
         iterativeReversalTrial(testArray, timeArray);
     }//End public PA2TimeAnalysisDelegateBrandonFrankart()
 
@@ -141,7 +145,8 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
     
     /**
      * Takes a list and recursively adds each long in the list
-     * @param N the size of the list
+     * @param array the array to be operated on
+     * @param index the size of the list
      * @return the sum of the list
      */
     public long recursiveSummation(Long[] array, int index)
@@ -150,9 +155,9 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
         if(array[index-1] <= 1)
             return array[index-1];
         
-        long sum = array[index-1] + recursiveSummation(array, index - 1);
-        return sum;
-    }//End public long recursiveSummation() 
+        
+        return array[index-1] + recursiveSummation(array, index - 1);
+    }//End public long recursiveSummation()    
     
     /**
      * Iterative reversal of a list
@@ -201,6 +206,22 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
         return timesArray;
     }//End public Long[] iterativeSummationTrail()
     
+    public Long[] recursiveSummationTimes(Long[] array, Long[] timesArray)
+    {
+        timeArraySize = 10001;
+        sumTime = 0;
+        timesArray = new Long[timeArraySize];
+        for(int i = 0; i < timesArray.length; i++)
+        {
+            startTime = System.nanoTime();
+            recursiveSummation(array, array.length);
+            stopTime = System.nanoTime();
+            elapsedTime = stopTime - startTime;
+            timesArray[i] = elapsedTime/1000;
+            sumTime += elapsedTime/1000;
+        }
+        return timesArray;
+    }
     /**
      * Displays the last 10 values in an array
      * @param array the array used
@@ -325,6 +346,7 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
         System.out.print("\nAverage iterative sum time in " + 
                          String.format("%,d", timeArraySize) + " trials = ");
         System.out.printf("%.5f", (double) sumTime / timeArraySize);
+        iterativeSumAverageTime = (double) sumTime / timeArraySize;
         System.out.println(" us\n\n[END Frequency Table]\n");          
     }
     
@@ -361,5 +383,61 @@ public final class PA2TimeAnalysisDelegateBrandonFrankart
                          String.format("%,d", timeArraySize) + " trials = ");
         System.out.printf("%.5f", (double) sumTime / timeArraySize);
         System.out.println(" us\n\n[END Frequency Table]\n");          
+    }
+    
+        /**
+     * THE ENTIRE recursive SUM OF AN ARRAY PORTION
+     * @param array 
+     * @param timesArray
+     */
+    public void recursiveSummationTrial(Long[] array, Long[] timesArray)
+    {
+        System.out.println(equalsLine());
+        System.out.println("RECURSIVE SUM OF AN ARRAY OF " + 
+                           String.format("%,d", testArraySize) + " LONGS");
+        System.out.println(equalsLine());
+        System.out.println("According to the Gauss formula,");
+        gaussMethod(array);
+        System.out.println("\nVerify correctness:  sum of the cells = "
+                            + String.format("%,d", recursiveSummation(array, array.length)));
+        timesArray = recursiveSummationTimes(array, timesArray);
+        System.out.println("\n" + asteriskLine());
+        System.out.println("Frequency Table of Elapsed Times in "
+                           + String.format("%,d", timeArraySize) + " Trials");
+        System.out.println(asteriskLine());
+        displayFrequencyTable(timesArray);
+        System.out.print("\nAverage recursive sum time in " + 
+                         String.format("%,d", timeArraySize) + " trials = ");
+        System.out.printf("%.5f", (double) sumTime / timeArraySize);
+        recursiveSumAverageTime = (double) sumTime / timeArraySize;
+        System.out.println(" us\n\n[END Frequency Table]\n");          
+    }
+    
+    public void summationComparison()
+    {
+        System.out.println(equalsLine());
+        System.out.println("             ALGORITHM COMPARISON FOR SUMMING");
+        System.out.println("Average Times to Sum an Array of 6,000 Longs in 10,001 Trials");
+        System.out.println(equalsLine());
+        System.out.print("\n");
+        System.out.println("Time in  us       Algorithm");
+        System.out.println("-----------       ---------");
+        System.out.printf("%.5f", iterativeSumAverageTime);
+        System.out.println("           Iterative\n");
+        System.out.printf("%.5f", recursiveSumAverageTime);
+        System.out.println("           Recursive\n");
+        if(recursiveSumAverageTime > iterativeSumAverageTime)
+        {
+            System.out.print("The recursive sum algorithm took ");
+            System.out.printf("%.1f", ((recursiveSumAverageTime/iterativeSumAverageTime)*100)-100);
+            System.out.println("% longer.");
+        }
+        else 
+        {
+            System.out.print("The iterative sum algorithm took ");
+            System.out.printf("%.1f", ((iterativeSumAverageTime/recursiveSumAverageTime)*100)-100);
+            System.out.println("% longer.");
+        }
+        System.out.println("");
     }
 }   
